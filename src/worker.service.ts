@@ -19,7 +19,6 @@ export class WorkerService  {
     }
 
     async callApiAsync(url: string, ms:number, id: string): Promise<any> {
-        // Use the pool to run the API call task with,myuuid a delay
         return this.pool.exec('callApi', [url,ms,id]);
       
     }
