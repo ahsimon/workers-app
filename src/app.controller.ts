@@ -13,11 +13,11 @@ export class AppController {
   @Get('fetch-multiple')
   async fetchMultiple( @Query('count') count: number) {
       // Convert count to a number
-      const numRequests = Number(count) || 1;
+      const numRequests = Number(count) || 10000;
 
       try {
 
-            this.workerService.callApiAsync("https://jsonplaceholder.typicode.com/todos/1")
+            this.workerService.callApiAsync("https://jsonplaceholder.typicode.com/todos/",numRequests);
   
           return { 'status':'ok' };
       } catch (error) {
