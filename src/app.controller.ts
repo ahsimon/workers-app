@@ -22,7 +22,7 @@ export class AppController {
             const start = Date.now();
              this.workerService.callApiAsync("https://jsonplaceholder.typicode.com/todos/1",numRequests,myuuid);
             const  end = (Date.now() - start);
-            return { 'status':'ok' , 'time in milliseconds'  : end};
+            return {'id':myuuid, 'status':'ok' , 'delay in milliseconds'  : end};
       } catch (error) {
           return { error: error.message };
       }

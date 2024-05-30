@@ -8,12 +8,12 @@ function delay(ms: number): Promise<void> {
 // Define the function to be executed by the worker pool
 // This function will be called by the worker pool to make the API request
  async function callApi(url: string, ms: number, id: string): Promise<any> {
-    console.log('Making API request to:', id, 'with delay:', ms);
+    console.log( 'START:',id);
     await delay(ms); // ms delayed
     
     try {
         const response: AxiosResponse<any> = await axios.get(url);
-        console.log('responsed to ', id , 'after', ms);
+        console.log('END:', id  , 'response', response.data,  'after:', ms  ,' milliseconds' ) ;
         return response.data;
     } catch (error) {
         throw new Error(error.message);
