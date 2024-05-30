@@ -1,7 +1,8 @@
 import { Controller, Get, Query } from '@nestjs/common';
 import { AppService } from './app.service';
 import { WorkerService } from './worker.service';
-import { time } from 'console';
+import {v4 as uuidv4} from 'uuid';
+
 
 @Controller()
 export class AppController {
@@ -17,10 +18,29 @@ export class AppController {
       const numRequests = Number(count) || 10000;
 
       try {
+            const myuuid = uuidv4();
             const start = Date.now();
-            await this.workerService.callApiAsync("https://jsonplaceholder.typicode.com/todos/",numRequests);
-            const  end = (Date.now() - start)/1000;
-          return { 'status':'ok' , 'time in seconds'  : end};
+             this.workerService.callApiAsync("https://jsonplaceholder.typicode.com/todos/1",numRequests,myuuid);
+            const  end = (Date.now() - start);
+            return { 'status':'ok' , 'time in milliseconds'  : end};
+      } catch (error) {
+          return { error: error.message };
+      }
+  }
+
+
+
+  @Get('fetch-simple')
+  async fetch( @Query('count') count: number) {
+      // Convert count to a number
+      const numRequests = Number(count) || 10000;
+
+      try {
+            const myuuid = uuidv4();
+            const start = Date.now();
+            fetch("https://jsonplaceholder.typicode.com/todos/1");
+            const  end = (Date.now() - start);
+            return { 'status':'ok' , 'time in milliseconds'  : end};
       } catch (error) {
           return { error: error.message };
       }

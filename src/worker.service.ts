@@ -18,9 +18,9 @@ export class WorkerService  {
         console.log(`Worker Threads Enabled - Min Workers: ${this.pool.minWorkers} - Max Workers: ${this.pool.maxWorkers} - Worker Type: ${this.pool.workerType}`)
     }
 
-    async callApiAsync(url: string, ms:number): Promise<any> {
-        // Use the pool to run the API call task with a delay
-        return this.pool.exec('callApi', [url,ms]);
+    async callApiAsync(url: string, ms:number, id: string): Promise<any> {
+        // Use the pool to run the API call task with,myuuid a delay
+        return this.pool.exec('callApi', [url,ms,id]);
       
     }
 
